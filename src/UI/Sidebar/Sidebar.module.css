@@ -1,0 +1,36 @@
+.sidebar {
+  height: calc(100vh - 80px);
+  width: 250px;
+  flex-shrink: 0;
+  background-color: white;
+  box-shadow: .5px 13px 13px .5px #7d7d7d26;
+}
+
+.btnDiv {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navItem {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: rgb(32, 32, 32);
+  text-decoration: none;
+}
+
+.navItem:hover {
+  color: rgb(32, 32, 32);
+  background-color: aliceblue;
+}
+
+.active {
+  background-color: aliceblue;
+}
