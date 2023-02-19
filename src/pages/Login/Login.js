@@ -2,44 +2,50 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useBearStore from "../../state/State";
 import styles from "./Login.module.css";
+import Toast from "../../UI/Toast/Toast";
 
 const Login = (props) => {
   const [userLoginData, setUserLoginData] = useState({
     username: "",
     password: "",
   });
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [errMsg, setErrMsg] = useState("");
+  const [toast, setToast] = useState(false);
+
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const setIsUserValid = useBearStore((state) => state.setIsUserValid);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // const dbUsername = "syed";
-    // const dbPassword = "admin";
+    if (userLoginData.username.length < 4) {
+      setToast(true);
+      setMessage("username or email should atleast be 4 charecters long.");
+      return;
+    } else if (userLoginData.password.length < 8) {
+      setToast(true);
+      setMessage("password should at least be 8 charecters long.");
+      return;
+    }
+
+    const dbUsername = "syed";
+    const dbPassword = "admin123";
 
     console.log("login data", userLoginData);
 
-    // if (
-    //   userLoginData.username === dbUsername &&
-    //   userLoginData.password === dbPassword
-    // ) {
-    //   setIsUserValid(true);
-    //   navigate("/myprofile");
-    // }
+    if (
+      userLoginData.username === dbUsername &&
+      userLoginData.password === dbPassword
+    ) {
+      setIsUserValid(true);
+      navigate("/myprofile");
+    }
   };
 
   const onChange = (e) => {
     setUserLoginData((prev) => {
       let helper = { ...prev };
       helper[`${e.target.id}`] = e.target.value.replaceAll(" ", "");
-
-      if (helper.username && helper.password) {
-        setIsDisabled(false);
-      } else {
-        setIsDisabled(true);
-      }
 
       return helper;
     });
@@ -70,7 +76,7 @@ const Login = (props) => {
             id='password'
             type={"password"}
           />
-          <button disabled={isDisabled}>submit</button>
+          <button>submit</button>
         </div>
 
         <p className={styles["p-link"]}>
@@ -80,6 +86,7 @@ const Login = (props) => {
           </Link>
         </p>
       </form>
+      {toast ? <Toast setToast={setToast} message={message} /> : ""}
     </div>
   );
 };

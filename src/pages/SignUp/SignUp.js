@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Toast from "../../UI/Toast/Toast";
 import styles from "../Login/Login.module.css";
 
 const SignUp = (props) => {
@@ -10,9 +11,9 @@ const SignUp = (props) => {
     password: "",
     cpassword: "",
   });
-  const [errMsg, setErrMsg] = useState("");
 
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [toast, setToast] = useState(false);
+  const [message, setMessage] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,29 +22,39 @@ const SignUp = (props) => {
     const dbPassword = "admin";
 
     if (userSignupData.cpassword !== userSignupData.password) {
-      setErrMsg("password do not match.");
-    } else {
-      setErrMsg("");
+      setToast(true);
+      setMessage("password do not match.");
+      return;
+    } else if (
+      userSignupData.fullname.trim().length === 0 ||
+      userSignupData.email.trim().length === 0 ||
+      userSignupData.username.trim().length === 0 ||
+      userSignupData.password.trim().length === 0 ||
+      userSignupData.cpassword.trim().length === 0
+    ) {
+      setToast(true);
+      setMessage("all fields are required.");
+      return;
+    } else if (userSignupData.fullname.length < 3) {
+      setToast(true);
+      setMessage("full name should at least be 3 charecters long.");
+      return;
+    } else if (userSignupData.username.length < 4) {
+      setToast(true);
+      setMessage("username should at least be 4 charecters long.");
+      return;
+    } else if (userSignupData.password.length < 8) {
+      setToast(true);
+      setMessage("password should at least be 8 charecters long.");
+      return;
     }
+    console.log(userSignupData);
   };
 
   const onChange = (e) => {
     setUserSignupData((prev) => {
       let helper = { ...prev };
       helper[`${e.target.id}`] = e.target.value.replaceAll(" ", "");
-
-      if (
-        helper.fullname &&
-        helper.email &&
-        helper.username &&
-        helper.password &&
-        helper.cpassword
-      ) {
-        setIsDisabled(false);
-      } else {
-        setIsDisabled(true);
-      }
-
       return helper;
     });
   };
@@ -97,8 +108,7 @@ const SignUp = (props) => {
             id='cpassword'
             type={"password"}
           />
-          <button disabled={isDisabled}>submit</button>
-          {errMsg}
+          <button>submit</button>
         </div>
 
         <p className={styles["p-link"]}>
@@ -108,6 +118,7 @@ const SignUp = (props) => {
           </Link>
         </p>
       </form>
+      {toast ? <Toast setToast={setToast} message={message} /> : ""}
     </div>
   );
 };

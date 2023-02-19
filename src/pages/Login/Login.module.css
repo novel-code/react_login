@@ -12,6 +12,16 @@
   gap: 1.2rem;
 }
 
+.input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.err-msg-div {
+  font-size: 13px;
+  color: rgba(255, 109, 72, 0.938);
+}
+
 .form {
   width: 400px;
   display: flex;
@@ -27,7 +37,8 @@
   border: none;
   border-bottom: solid 1px rgb(156, 156, 156);
   outline: none;
-  padding-bottom: .5rem;
+  padding-bottom: .25rem;
+  font-size: 16px;
 }
 
 .form input:focus {
