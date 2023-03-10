@@ -35,15 +35,15 @@ const SignUp = (props) => {
       setToast(true);
       setMessage("all fields are required.");
       return;
-    } else if (userSignupData.fullname.length < 3) {
+    } else if (userSignupData.fullname.trim().length < 3) {
       setToast(true);
       setMessage("full name should at least be 3 charecters long.");
       return;
-    } else if (userSignupData.username.length < 4) {
+    } else if (userSignupData.username.trim().length < 4) {
       setToast(true);
       setMessage("username should at least be 4 charecters long.");
       return;
-    } else if (userSignupData.password.length < 8) {
+    } else if (userSignupData.password.trim().length < 8) {
       setToast(true);
       setMessage("password should at least be 8 charecters long.");
       return;

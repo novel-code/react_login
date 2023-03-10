@@ -12,12 +12,12 @@
 
 .opacity-0 {
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .opacity-1 {
   opacity: 1;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .close {
@@ -28,6 +28,22 @@
   border-radius: 50px;
   border: none;
   align-self: center;
+}
+
+.danger {
+  border-bottom: solid 2px #dc3545;
+}
+
+.success {
+  border-bottom: solid 2px #28a745;
+}
+
+.info {
+  border-bottom: solid 2px #17a2b8;
+}
+
+.warning {
+  border-bottom: solid 2px #ffc107;
 }
 
 /* opacity: 1;

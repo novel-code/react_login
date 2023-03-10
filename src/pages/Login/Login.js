@@ -9,22 +9,38 @@ const Login = (props) => {
     username: "",
     password: "",
   });
-  const [toast, setToast] = useState(false);
+  // const [toast, setToast] = useState(false);
+  // const [message, setMessage] = useState("");
 
-  const [message, setMessage] = useState("");
+  const [toast, setToast] = useState({
+    showToast: false,
+    message: "",
+    messageType: "",
+  });
+
   const navigate = useNavigate();
   const setIsUserValid = useBearStore((state) => state.setIsUserValid);
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (userLoginData.username.length < 4) {
-      setToast(true);
-      setMessage("username or email should atleast be 4 charecters long.");
+    if (userLoginData.username.trim().length < 4) {
+      // setToast(true);
+      // setMessage("username or email should atleast be 4 charecters long.");
+      setToast({
+        showToast: true,
+        message: "username or email should atleast be 4 charecters long.",
+        messageType: "danger",
+      });
       return;
-    } else if (userLoginData.password.length < 8) {
-      setToast(true);
-      setMessage("password should at least be 8 charecters long.");
+    } else if (userLoginData.password.trim().length < 8) {
+      // setToast(true);
+      // setMessage("password should at least be 8 charecters long.");
+      setToast({
+        showToast: true,
+        message: "password should at least be 8 charecters long.",
+        messageType: "danger",
+      });
       return;
     }
 
@@ -86,7 +102,15 @@ const Login = (props) => {
           </Link>
         </p>
       </form>
-      {toast ? <Toast setToast={setToast} message={message} /> : ""}
+      {toast.showToast ? (
+        <Toast
+          setToast={setToast}
+          message={toast.message}
+          messageType={toast.messageType}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
