@@ -45,7 +45,7 @@ const Login = (props) => {
     }
 
     const dbUsername = "syed";
-    const dbPassword = "admin123";
+    const dbPassword = "syed5,55";
 
     console.log("login data", userLoginData);
 
@@ -54,7 +54,7 @@ const Login = (props) => {
       userLoginData.password === dbPassword
     ) {
       setIsUserValid(true);
-      navigate("/myprofile");
+      navigate("/profile");
     }
   };
 

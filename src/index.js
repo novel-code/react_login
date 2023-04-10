@@ -5,8 +5,9 @@ import App from "./App";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
-import MyProfile from "./pages/MyProfile/MyProfile";
+import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
+import Friends from "./pages/Friends/Friends";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,8 +16,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-          <Route path='myprofile' element={<MyProfile />} />
+          <Route path='profile' element={<Profile />} />
           <Route path='about' element={<About />} />
+          <Route path='friends' element={<Friends />} />
         </Route>
         <Route path='signup' element={<SignUp />} />
         <Route path='login' element={<Login />} />
